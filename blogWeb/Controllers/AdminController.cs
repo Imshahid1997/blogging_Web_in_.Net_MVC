@@ -83,5 +83,10 @@ namespace blogWeb.Controllers
             db.SaveChanges();
             return RedirectToAction("AllPost", "Admin");
         }
+
+        public IActionResult CreateProfile()
+        {
+            return View();
+        }
     }
 }
