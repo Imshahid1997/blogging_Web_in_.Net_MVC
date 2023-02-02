@@ -1,5 +1,6 @@
 ﻿@using blogWeb.ViewModels
 @model ProfileVM 
+<h1>Create new user</h1>
 <div class="container">
     <div class="row align-content-end">
         <div class="col-md-10">
@@ -56,6 +57,7 @@
                     <div class="form-group">
                         <label asp-for="ConfirmPassword" class="form-label"> </label>
                         <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-warning"></span>
                     </div>
 
                     </div>
