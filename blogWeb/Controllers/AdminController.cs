@@ -3,6 +3,7 @@ using blogWeb.Models;
 using blogWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace blogWeb.Controllers
 {
@@ -36,12 +37,15 @@ namespace blogWeb.Controllers
             if (HttpContext.Session.GetString("LoginFlag") != null)
             {
                 DisplayData();
-            return View();
+                return View();
             }
             else
-                return RedirectToAction("Login", "Admin");
-        }
+                //return RedirectToAction("Login", "Admin");
+                return Redirect("/Admin/Login?ReturnUrl=/Admin/AddPost");
+            }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddPost(PostVM myPost)
         {
             DisplayData();
@@ -101,7 +105,9 @@ namespace blogWeb.Controllers
             var PosttoUpdate = db.Tbl_Post.Find(Id);
                 return View(PosttoUpdate);
         }
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdatePost(Post post)
         {
             
@@ -122,6 +128,7 @@ namespace blogWeb.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateProfile(ProfileVM profileVM)
         {
             DisplayData();
@@ -155,7 +162,8 @@ namespace blogWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginVM loginVM)
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginVM loginVM, string? ReturnUrl)
         {
             if(ModelState.IsValid)
             {
@@ -165,7 +173,16 @@ namespace blogWeb.Controllers
                 {   //session is like a global variable data can be accessed in allproject
                     HttpContext.Session.SetInt32("ProfileId",result.Id);
                     HttpContext.Session.SetString("LoginFlag", "true");
-                    return RedirectToAction("Index", "Admin");
+                   if(ReturnUrl==null)
+                    { 
+                        return RedirectToAction("Index", "Admin"); 
+                    }
+                   else
+                    {
+
+                        return Redirect(ReturnUrl);
+                    }
+                   
                 }
 
             // taking msg from here to view on invalid attempt
@@ -180,7 +197,74 @@ namespace blogWeb.Controllers
         public void DisplayData()
         {
             ViewBag.Profile = db.Tbl_Profile.Where(x => x.Id.Equals(HttpContext.Session
-                .GetInt32("ProfileId"))).FirstOrDefault();
+                .GetInt32("ProfileId"))).AsNoTracking().FirstOrDefault();
+            //AsNoTracking() stops the tracking of id its extention method currently using for reading onl
         }
-    }
+
+
+        public IActionResult UpdateProfile(int Id)
+        {
+            DisplayData();
+            var myProfile = db.Tbl_Profile.Find(Id);
+            ProfileVM pVm = new ProfileVM();
+            pVm.Id = myProfile.Id;
+            pVm.Name = myProfile.Name;
+            pVm.FatherName = myProfile.FatherName;
+            pVm.Bio = myProfile.Bio;
+            pVm.username = myProfile.username;
+            pVm.Password = myProfile.Password;
+
+            pVm.ConfirmPassword = myProfile.Password;
+            ViewData["ImageName"] = myProfile.Image;
+
+            return View(pVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateProfile(ProfileVM myProfile, string? oldpic)
+        {
+            DisplayData();
+            string imageName = null;
+            if (ModelState.IsValid)
+            {
+                if (myProfile.Image != null)
+                {
+                    imageName = myProfile.Image.FileName.ToString();
+                    var FolderPath = Path.Combine(env.WebRootPath, "images");
+                    var Imagepath = Path.Combine(FolderPath, imageName);
+                    myProfile.Image.CopyTo(new FileStream(Imagepath, FileMode.Create));
+                }
+                Profile originalProfile = new Profile();
+                originalProfile.Id = myProfile.Id;
+                originalProfile.Name = myProfile.Name;
+                originalProfile.FatherName = myProfile.FatherName;
+                originalProfile.Bio = myProfile.Bio;
+                originalProfile.username = myProfile.username;
+                originalProfile.Password = myProfile.Password;
+                
+                if(!string.IsNullOrEmpty(imageName))
+                {
+                    originalProfile.Image = imageName;
+                }
+                else
+                {
+                    originalProfile.Image = oldpic;
+                }
+                db.Tbl_Profile.Update(originalProfile);
+                db.SaveChanges();
+                return View("Index", "Admin");
+            }
+
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                ViewData["ImageName"] = imageName;
+            }
+            else
+            {
+                ViewData["ImageName"] = oldpic;
+            }
+            return View();
+        }
+        }
 }

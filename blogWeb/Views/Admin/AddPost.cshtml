@@ -4,6 +4,7 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-10">
+			
 			<!--enctype="multipart/form-data" allows us to upload pictures in form-->
 			<form method="post" asp-controller="Admin" asp-action="AddPost" enctype="multipart/form-data">
 				<div class="row justify-content-center">
@@ -79,8 +80,9 @@
 
 					</div>
 
-				
-			
+
+				<div asp-validation-summary="All" class="text-danger">
+				</div>   
 				<button class="btn btn-primary" type="submit">Create Post</button>
 
 			</form>

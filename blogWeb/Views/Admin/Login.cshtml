@@ -1,6 +1,7 @@
 ﻿@using blogWeb.ViewModels;
 @{
     Layout = null;
+    var myUrl = Context.Request.Query["ReturnUrl"];
 }
 @model LoginVM
 <html lang="en">
@@ -15,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form-1" method="post" asp-action="Login" asp-controller="Admin">
+        <form class="form-1" method="post" asp-action="Login" asp-controller="Admin" asp-route-ReturnUrl="@myUrl">
             <h1>Login</h1>
             <label asp-for="username"></label>
             <input asp-for="username"/>

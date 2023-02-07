@@ -4,11 +4,13 @@ namespace blogWeb.ViewModels
 {
     public class ProfileVM
     {
-    
+        public int Id { get; set; }
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string Bio { get; set; }
-        public IFormFile Image { get; set; }
+
+        //? is use to accept the values even its null or empty
+        public IFormFile? Image { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
