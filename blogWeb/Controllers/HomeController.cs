@@ -11,9 +11,15 @@ namespace blogWeb.Controllers
 		{
 			db = _db;
 		}
-		public IActionResult Index()
+		public IActionResult Index(string? searchquery)
 		{
 			SharedLayOutData();
+			if(!string.IsNullOrEmpty(searchquery))
+			{
+                IEnumerable<Post> Posts = db.Tbl_Post.Where(x => x.Content.Contains(searchquery));
+				return View(Posts);
+            }
+
 			IEnumerable<Post> mypost = db.Tbl_Post;
 			return View(mypost);
 		}

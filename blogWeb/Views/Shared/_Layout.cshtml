@@ -47,8 +47,8 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             <a class="nav-link disabled">Disabled</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" method="post" asp-action="Index" asp-controller="Admin">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchquery">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
