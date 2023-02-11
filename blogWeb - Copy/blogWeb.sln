@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blogWeb", "blogWeb.csproj", "{2A518F60-3376-4839-B946-3759455171E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blogWeb", "blogWeb.csproj", "{2A518F60-3376-4839-B946-3759455171E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167} = {A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24} = {FB83A95B-577C-4D4F-83C5-09C3E6755E24}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blogWeb.Models", "..\blogWeb.Models\blogWeb.Models.csproj", "{FB83A95B-577C-4D4F-83C5-09C3E6755E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blogWeb.DataAccess", "..\blogWeb.DataAccess\blogWeb.DataAccess.csproj", "{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24} = {FB83A95B-577C-4D4F-83C5-09C3E6755E24}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,14 @@ Global
 		{2A518F60-3376-4839-B946-3759455171E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A518F60-3376-4839-B946-3759455171E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A518F60-3376-4839-B946-3759455171E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB83A95B-577C-4D4F-83C5-09C3E6755E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4716D3C-C0A8-44FC-806B-F0B0BA9DB167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
