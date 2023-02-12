@@ -1,0 +1,96 @@
+﻿@using blogWeb.Models;
+@model Post
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-10">
+			<form method="post" asp-controller="Admin" asp-action="UpdatePost">
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="Title"></label>
+							<input class="form-control" asp-for="Title" />
+
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="SubTitle"></label>
+							<input class="form-control" asp-for="SubTitle" />
+
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="Date"></label>
+							<input class="form-control" asp-for="Date" />
+
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="Slug"></label>
+							<input class="form-control" asp-for="Slug" />
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+
+
+
+
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="Image"></label>
+							<input class="form-control" asp-for="Image" />
+
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" asp-for="Content"></label>
+
+							<textarea class="form-control" asp-for="Content" id="editor">
+
+								</textarea>
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+				<button class="btn btn-primary" type="submit">Update Post</button>
+
+			</form>
+
+		</div>
+
+	</div>
+</div>
+<script>
+	ClassicEditor
+		.create(document.querySelector('#editor'))
+		.catch(error => {
+			console.error(error);
+		});
+</script>
