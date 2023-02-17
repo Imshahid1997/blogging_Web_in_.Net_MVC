@@ -40,6 +40,7 @@ namespace blogWeb.Controllers
 		// profile info
 		public void SharedLayOutData()
 		{
+
 			ViewBag.Post = db.Tbl_Post;
 			ViewBag.Profile = db.Tbl_Profile.FirstOrDefault();
 
