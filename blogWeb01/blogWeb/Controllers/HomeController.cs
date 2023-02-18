@@ -22,7 +22,7 @@ namespace blogWeb.Controllers
 				return View(Posts);
             }
 
-			IEnumerable<Post> mypost = db.Tbl_Post.ToPagedList(pageNumber??1,5);
+			IEnumerable<Post> mypost = db.Tbl_Post;
 			return View(mypost);
 		}
 
