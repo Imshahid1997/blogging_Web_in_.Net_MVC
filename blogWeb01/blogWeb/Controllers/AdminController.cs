@@ -17,6 +17,34 @@ namespace blogWeb.Controllers
             db = _db;
             env = environment;
         }
+        public IActionResult AllUsers()
+        {
+            if (HttpContext.Session.GetString("LoginFlag") != null)
+            { DisplayData();
+                IEnumerable<Profile> profiles = db.Tbl_Profile;
+                
+               
+                return View(profiles);
+
+
+               
+            }
+            else
+                return RedirectToAction("Login", "Admin");
+        }
+
+        public IActionResult DeleteProfile(int id)
+        {
+            DisplayData();
+            var ProfileToDelete = db.Tbl_Profile.Find(id);
+            if (ProfileToDelete != null)
+            {
+                db.Remove(ProfileToDelete);
+                db.SaveChanges();
+            }
+            return RedirectToAction("AllPost", "Admin");
+
+        }
 
         public IActionResult Index()
         {
@@ -149,10 +177,11 @@ namespace blogWeb.Controllers
 
                 db.Tbl_Profile.Add(profile);
                 db.SaveChanges();
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index","Admin");
             }
             return View();
         }
+
 
 
         [HttpGet]

@@ -48,4 +48,30 @@
 
 }
 
+@{
+    double T_Pages = ViewBag.TotalNumPages;
+    int cpage = ViewBag.CurrentPage;
+    for (int i = 1; i <= T_Pages; i++)
+    {
+    <ul class="pagination">
 
+            @if(i==cpage)
+            {
+                 <li class="active">
+                 <a class="active" asp-route-pageNumber=i>@i </a>
+                    
+                </li>
+            }
+            else
+            {
+                <li>
+                 <a class="active" asp-route-pageNumber=i>@i </a>
+                    
+            </li>
+            }
+
+    </ul>
+    }
+}
+
+ 

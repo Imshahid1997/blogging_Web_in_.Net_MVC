@@ -13,7 +13,7 @@ namespace blogWeb.Controllers
 		{
 			db = _db;
 		}
-		public IActionResult Index(string? searchquery, int? pageNumber)
+		public IActionResult Index(string? searchquery, int  pageNumber =1)
 		{
 			SharedLayOutData();
 			if(!string.IsNullOrEmpty(searchquery))
@@ -23,8 +23,16 @@ namespace blogWeb.Controllers
             }
 
 			IEnumerable<Post> mypost = db.Tbl_Post;
+			ViewBag.TotalNumPages=Math.Ceiling(mypost.Count() / 2.0);
+			ViewBag.CurrentPage = pageNumber;
+			mypost = mypost.Skip((pageNumber - 1) * 10).Take(10).ToList();
+
 			return View(mypost);
 		}
+
+
+
+
 
 		[Route("Home/Post/{Slug}")]
 		public IActionResult Post(string Slug)

@@ -1,0 +1,32 @@
+﻿@using blogWeb.Models;
+@model IEnumerable<Profile>
+<h2> All Blog Posts</h2>
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      
+      <th scope="col">Name</th>
+      <th scope="col">Father Name</th>
+      
+        <th scope="col" >Action</th>
+    </tr>
+  </thead>
+  <tbody>
+@foreach (var item in Model)
+        {
+            <tr>
+              
+                <td>@item.Name</td>
+                 <td>@item.FatherName</td>
+
+                
+               
+                <td>
+                    <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProfile" asp-route-Id="@item.Id"><i class="bi bi-trash">Delete Profile</i></a>
+                </td>
+            </tr>
+        }
+    
+    
+  </tbody>
+</table>
