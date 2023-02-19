@@ -58,14 +58,15 @@
             @if(i==cpage)
             {
                  <li class="active">
-                 <a class="active" asp-route-pageNumber=i>@i </a>
-                    
+              
+                       @Html.ActionLink(i.ToString(),"Index",new{pageNumber=i})
                 </li>
             }
             else
             {
                 <li>
-                 <a class="active" asp-route-pageNumber=i>@i </a>
+                @Html.ActionLink(i.ToString(),"Index",new{pageNumber=i})
+                 
                     
             </li>
             }

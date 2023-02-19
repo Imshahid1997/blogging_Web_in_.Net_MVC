@@ -47,7 +47,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             <a class="nav-link disabled">Disabled</a>
           </li>
         </ul>
-        <form class="d-flex" method="post" asp-action="Index" asp-controller="Admin">
+        <form class="d-flex" method="post" asp-action="Index" asp-controller="Home">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchquery">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
@@ -84,7 +84,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-col l4">
   <!-- About Card -->
   <div class="w3-card w3-margin w3-margin-top">
-  <img src="~/images/@myProfile.Image" style="width:100%">
+  <img src="~/images/@myProfile.Image" style="width:100%;">
     <div class="w3-container w3-white">
     <h4><b>@myProfile.Name</b></h4>
     <P>@myProfile.Bio</P>    

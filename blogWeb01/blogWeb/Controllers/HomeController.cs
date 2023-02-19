@@ -19,11 +19,14 @@ namespace blogWeb.Controllers
 			if(!string.IsNullOrEmpty(searchquery))
 			{
                 IEnumerable<Post> Posts = db.Tbl_Post.Where(x => x.Content.Contains(searchquery));
+				ViewBag.TotalNumPages = Math.Ceiling(Posts.Count() /2.0);
+				Posts = Posts.Skip((pageNumber - 1) * 10).Take(10).ToList();
+				ViewBag.CurrentPage = pageNumber;
 				return View(Posts);
             }
 
 			IEnumerable<Post> mypost = db.Tbl_Post;
-			ViewBag.TotalNumPages=Math.Ceiling(mypost.Count() / 2.0);
+			ViewBag.TotalNumPages=Math.Ceiling(mypost.Count() /2.0);
 			ViewBag.CurrentPage = pageNumber;
 			mypost = mypost.Skip((pageNumber - 1) * 10).Take(10).ToList();
 
